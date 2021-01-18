@@ -42,3 +42,13 @@ variable "bastion_key_name" {
   description = "bastion key"
   # set in terraform.tfvars
 }
+
+variable "postgres_db_password" {
+  description = "rds password"
+  default     = "password123"
+}
+
+variable "postgres_db_username" {
+  description = "rds username"
+  default     = "user123"
+}

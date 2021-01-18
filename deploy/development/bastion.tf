@@ -36,9 +36,9 @@ resource "aws_instance" "bastion" {
   key_name             = var.bastion_key_name
   subnet_id            = aws_subnet.public_a.id
 
-  # vpc_security_group_ids = [
-  #   aws_security_group.bastion.id
-  # ]
+  vpc_security_group_ids = [
+    aws_security_group.bastion.id
+  ]
 
   tags = merge(
     local.common_tags,
