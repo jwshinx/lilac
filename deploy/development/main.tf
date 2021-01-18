@@ -27,7 +27,8 @@ resource "aws_key_pair" "auth" {
 }
 
 locals {
-  prefix = "${var.prefix}-${terraform.workspace}"
+  prefix  = var.prefix
+  project = var.project
   common_tags = {
     Environment = terraform.workspace
     Project     = var.project

@@ -4,7 +4,7 @@
 #   allow postgres access in
 resource "aws_security_group" "bastion" {
   description = "control bastion inbound and outbound access"
-  name        = "${local.prefix}-bastion"
+  name        = "${local.project}-${local.prefix}-bastion"
   vpc_id      = aws_vpc.main.id
 
   ingress {

@@ -1,5 +1,5 @@
 variable "prefix" {
-  description = "common tag indicating prefix (eg: environment)"
+  description = "common tag indicating environment prefix (eg: development)"
   # set in terraform.tfvars
 }
 

@@ -29,8 +29,8 @@ data "aws_ami" "amazon_linux" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 
 resource "aws_instance" "bastion" {
-  ami                  = data.aws_ami.amazon_linux.id
-  instance_type        = "t2.micro"
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t2.micro"
   # user_data            = file("./templates/bastion/user-data.sh")
   # iam_instance_profile = aws_iam_instance_profile.bastion.name
   # key_name             = var.bastion_key_name
@@ -40,8 +40,8 @@ resource "aws_instance" "bastion" {
   #   aws_security_group.bastion.id
   # ]
 
-  # tags = merge(
-  #   local.common_tags,
-  #   map("Name", "${local.prefix}-bastion")
-  # )
+  tags = merge(
+    local.common_tags,
+    map("Name", "${local.project}-${local.prefix}-bastion")
+  )
 }
