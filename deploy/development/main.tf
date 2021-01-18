@@ -13,5 +13,27 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.aws_region
+  region = var.aws_region
 }
+
+resource "aws_key_pair" "auth" {
+  key_name   = var.key_name
+  public_key = file(var.public_key_path)
+
+  tags = merge(
+    local.common_tags,
+    map("Name", "${local.prefix}-kp")
+  )
+}
+
+locals {
+  prefix = "${var.prefix}-${terraform.workspace}"
+  common_tags = {
+    Environment = terraform.workspace
+    Project     = var.project
+    Owner       = var.contact
+    ManagedBy   = "Terraform"
+  }
+}
+
+data "aws_region" "current" {}
