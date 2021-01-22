@@ -35,7 +35,7 @@ resource "aws_security_group" "rds-postgres" {
 
 resource "aws_db_instance" "lilac_postgres" {
   identifier              = "${local.project}-${local.prefix}-db"
-  name                    = "lilac"
+  name                    = "education"
   allocated_storage       = 20
   storage_type            = "gp2"
   engine                  = "postgres"
