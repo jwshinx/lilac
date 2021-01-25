@@ -22,7 +22,7 @@ resource "aws_key_pair" "auth" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-kp")
+    map("Name", "${local.project}-${local.prefix}-kp")
   )
 }
 

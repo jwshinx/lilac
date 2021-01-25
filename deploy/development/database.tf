@@ -7,7 +7,7 @@ resource "aws_db_subnet_group" "main" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-main")
+    map("Name", "${local.project}-${local.prefix}-main")
   )
 }
 
@@ -26,7 +26,7 @@ resource "aws_security_group" "rds-postgres" {
 
     security_groups = [
       aws_security_group.bastion.id,
-      # aws_security_group.ecs_service.id
+      aws_security_group.ecs_service.id # 012421
     ]
   }
 
@@ -51,6 +51,6 @@ resource "aws_db_instance" "lilac_postgres" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-main")
+    map("Name", "${local.project}-${local.prefix}-postgres")
   )
 }

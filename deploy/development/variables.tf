@@ -45,10 +45,15 @@ variable "bastion_key_name" {
 
 variable "postgres_db_password" {
   description = "rds password"
-  default     = "password123"
+  # set in terraform.tfvars
 }
 
 variable "postgres_db_username" {
   description = "rds username"
-  default     = "user123"
+  # set in terraform.tfvars
+}
+
+variable "ecr_image_colleges" {
+  description = "colleges ecr image"
+  # set in terraform.tfvars
 }
