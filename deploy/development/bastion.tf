@@ -65,7 +65,7 @@ resource "aws_instance" "bastion" {
   provisioner "file" {
     # source      = "/Users/joel/Documents/tmp/maui.txt"
     source      = "./foobar.txt"
-    destination = "/home/ec2-user/maui.txt"
+    destination = "/home/ec2-user/foobar.txt"
 
     connection {
       type        = "ssh"
