@@ -64,8 +64,8 @@ resource "aws_instance" "bastion" {
   # export TF_LOG=
   provisioner "file" {
     # source      = "/Users/joel/Documents/tmp/maui.txt"
-    source      = "./foobar.txt"
-    destination = "/home/ec2-user/foobar.txt"
+    source      = "templates/bastion/postgres-init.sql"
+    destination = "/home/ec2-user/postgres-init.sql"
 
     connection {
       type        = "ssh"
