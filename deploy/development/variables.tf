@@ -57,3 +57,8 @@ variable "ecr_image_colleges" {
   description = "colleges ecr image"
   # set in terraform.tfvars
 }
+
+variable "private_key_path" {
+  description = "key for ssh sql file to bastion"
+  type        = string
+}

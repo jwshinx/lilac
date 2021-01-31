@@ -33,12 +33,53 @@ resource "aws_instance" "bastion" {
   instance_type        = "t2.micro"
   user_data            = file("./templates/bastion/user-data.sh")
   iam_instance_profile = aws_iam_instance_profile.bastion.name
-  key_name             = var.bastion_key_name
-  subnet_id            = aws_subnet.public_a.id
+  # key_name             = var.bastion_key_name
+  key_name  = aws_key_pair.auth.id
+  subnet_id = aws_subnet.public_a.id
 
   vpc_security_group_ids = [
     aws_security_group.bastion.id
   ]
+
+  # connection {
+  #   type        = "ssh"
+  #   user        = "ubuntu"
+  #   host        = self.public_ip
+  #   private_key = file("~/.ssh/jft-lilac")
+  #   # private_key = file(var.private_key_path)
+  #   # private_key = file(var.public_key_path)
+  #   # private_key = aws_key_pair.auth.id
+  #   timeout = "5m"
+  #   agent   = false
+  #   # The connection will use the local SSH agent for authentication.
+  # }
+
+  # seems flaky. sometimes i get cant ssh handshake error
+  # order matters, this comes after connection block
+  # provisioner "file" {
+  #   source      = "./templates/bastion/postgres-init.sql"
+  #   destination = "/home/ec2-user/postgres-init.sql"
+  # }
+  # export TF_LOG=TRACE
+  # export TF_LOG=
+  provisioner "file" {
+    # source      = "/Users/joel/Documents/tmp/maui.txt"
+    source      = "./foobar.txt"
+    destination = "/home/ec2-user/maui.txt"
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = self.public_ip
+      private_key = file("~/.ssh/jft-lilac")
+      # private_key = file(var.private_key_path)
+      # private_key = file(var.public_key_path)
+      # private_key = aws_key_pair.auth.id
+      timeout = "5m"
+      agent   = false
+      # The connection will use the local SSH agent for authentication.
+    }
+  }
 
   tags = merge(
     local.common_tags,
